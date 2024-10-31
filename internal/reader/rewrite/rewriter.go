@@ -25,6 +25,8 @@ func (rule rule) applyRule(entryURL string, entry *model.Entry) {
 	switch rule.name {
 	case "add_image_title":
 		entry.Content = addImageTitle(entryURL, entry.Content)
+	case "add_image_title_and_alt":
+		entry.Content = addImageTitleAndAlt(entryURL, entry.Content)
 	case "add_mailto_subject":
 		entry.Content = addMailtoSubject(entryURL, entry.Content)
 	case "add_dynamic_image":

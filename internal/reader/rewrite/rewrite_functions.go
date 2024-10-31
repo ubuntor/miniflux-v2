@@ -53,6 +53,30 @@ func addImageTitle(entryURL, entryContent string) string {
 	return entryContent
 }
 
+func addImageTitleAndAlt(entryURL, entryContent string) string {
+	doc, err := goquery.NewDocumentFromReader(strings.NewReader(entryContent))
+	if err != nil {
+		return entryContent
+	}
+
+	matches := doc.Find("img[src][title]")
+
+	if matches.Length() > 0 {
+		matches.Each(func(i int, img *goquery.Selection) {
+			altAttr := img.AttrOr("alt", "")
+			srcAttr, _ := img.Attr("src")
+			titleAttr, _ := img.Attr("title")
+
+			img.ReplaceWithHtml(`<figure><img src="` + srcAttr + `" alt="` + altAttr + `"/><figcaption><p>` + html.EscapeString(titleAttr) + `</p><hr/><p>` + html.EscapeString(altAttr) + `</p></figcaption></figure>`)
+		})
+
+		output, _ := doc.Find("body").First().Html()
+		return output
+	}
+
+	return entryContent
+}
+
 func addMailtoSubject(entryURL, entryContent string) string {
 	doc, err := goquery.NewDocumentFromReader(strings.NewReader(entryContent))
 	if err != nil {
