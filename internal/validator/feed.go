@@ -81,14 +81,14 @@ func ValidateFeedModification(store *storage.Storage, userID, feedID int64, requ
 	}
 
 	if request.BlocklistRules != nil {
-		if !IsValidRegex(*request.BlocklistRules) {
-			return locale.NewLocalizedError("error.feed_invalid_blocklist_rule")
+		if err := isValidFilterRules(*request.BlocklistRules, "block"); err != nil {
+			return err
 		}
 	}
 
 	if request.KeeplistRules != nil {
-		if !IsValidRegex(*request.KeeplistRules) {
-			return locale.NewLocalizedError("error.feed_invalid_keeplist_rule")
+		if err := isValidFilterRules(*request.KeeplistRules, "keep"); err != nil {
+			return err
 		}
 	}
 

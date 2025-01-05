@@ -149,7 +149,7 @@
                     {{ icon "external-link" }}
                 </a>
             </div>
-            <input type="text" name="blocklist_rules" id="form-blocklist-rules" value="{{ .form.BlocklistRules }}" spellcheck="false">
+            <textarea id="form-blocklist-rules" name="blocklist_rules" cols="40" rows="10" spellcheck="false">{{ .form.BlocklistRules }}</textarea>
 
             <div class="form-label-row">
                 <label for="form-keeplist-rules">
@@ -160,7 +160,7 @@
                     {{ icon "external-link" }}
                 </a>
             </div>
-            <input type="text" name="keeplist_rules" id="form-keeplist-rules" value="{{ .form.KeeplistRules }}" spellcheck="false">
+            <textarea id="form-keeplist-rules" name="keeplist_rules" cols="40" rows="10" spellcheck="false">{{ .form.KeeplistRules }}</textarea>
 
             <div class="form-label-row">
                 <label for="form-urlrewrite-rules">
