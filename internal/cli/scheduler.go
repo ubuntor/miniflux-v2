@@ -30,7 +30,7 @@ func runScheduler(store *storage.Storage, pool *worker.Pool) {
 }
 
 func feedScheduler(store *storage.Storage, pool *worker.Pool, frequency, batchSize, errorLimit int) {
-	for range time.Tick(time.Duration(frequency) * time.Minute) {
+	for range time.Tick(time.Duration(frequency*15) * time.Second) { // hack to *4 freq
 		// Generate a batch of feeds for any user that has feeds to refresh.
 		batchBuilder := store.NewBatchBuilder()
 		batchBuilder.WithBatchSize(batchSize)
